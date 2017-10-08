@@ -7,7 +7,7 @@ python:
 matrix:
   fast_finish: true
   allow_failures:
-    - python: nightly
+    - python: 3.6, nightly
 before_install:
   - apt-cache policy python python2.7-minimal python-dev python3 python3-dev
   - dpkg --search /usr/bin/python
@@ -16,6 +16,7 @@ before_install:
 script:
   - pytest
   - python Hello_world.py
+  - travis_wait nuitka                                --python2-for-scons=/usr/bin/python2.7 --exe Hello_world.py
   - travis_wait nuitka --recurse-all --recurse-stdlib --python2-for-scons=/usr/bin/python2.7 --exe Hello_world.py
   - ./Hello_world.exe
   - which nuitka
