@@ -1,1 +1,2 @@
 nuitka
+cx_Freeze
