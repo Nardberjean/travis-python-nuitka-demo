@@ -1,2 +1,2 @@
 nuitka
-cx_Freeze
+# cx_Freeze
