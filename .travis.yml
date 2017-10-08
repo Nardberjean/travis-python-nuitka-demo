@@ -14,8 +14,17 @@ script:
   - travis_wait nuitka --recurse-all --recurse-stdlib --exe Hello_world.py
   - ./Hello_world.exe
   - which nuitka
-  - travis_wait nuitka --recurse-all --recurse-stdlib --exe `which nuitka`
+  - travis_wait nuitka --exe `which nuitka`
   - travis_wait ./nuitka.exe --recurse-all --recurse-stdlib --exe Hello_world.py
   - ./Hello_world.exe
   - ls
   - nuitka --help
+
+# Python3, yes but Python2 compile time dependency
+# http://nuitka.net/doc/user-manual.html#use-case-1-program-compilation-with-all-modules-embedded
+# Nuitka itself is fully Python3 compatible except for Scons.
+# http://scons.org/tag/releases.html
+
+# Moving to other machines
+# The created binaries can be made executable independent of the Python installation, with --standalone option.
+# http://nuitka.net/doc/user-manual.html#use-case-1-program-compilation-with-all-modules-embedded
