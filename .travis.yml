@@ -9,5 +9,6 @@ matrix:
     - python: nightly
 script:
   - pytest
-  - nuitka --recurse-all --recurse-stdlib --exe Hello_world.py
-  - Hello_world.exe
+  - travis_wait nuitka --recurse-all --recurse-stdlib --exe Hello_world.py
+  - ls
+  - ./Hello_world.exe
