@@ -5,3 +5,5 @@ python:
   - nightly
 script:
   - pytest
+  - nuitka --recurse-all --recurse-stdlib --exe Hello_world.py
+  - /usr/bin/time --format "M: %M  t: %t  I: %I  O: %O  w: %w c: %c" Hello_world.exe
