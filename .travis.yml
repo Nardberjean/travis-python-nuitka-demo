@@ -13,4 +13,5 @@ script:
   - which nuitka
   - travis_wait nuitka --recurse-all --recurse-stdlib --exe Hello_world.py
   - ls
+  - cat travis_wait_*.log
   - ./Hello_world.exe
