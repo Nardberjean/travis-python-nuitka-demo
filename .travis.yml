@@ -19,8 +19,8 @@ before_install:
 script:
   - pytest
   - python Hello_world.py
-  - travis_wait nuitka                                --python2-for-scons=/usr/bin/python2.7 --exe Hello_world.py --run
-  - travis_wait nuitka --recurse-all --recurse-stdlib --python2-for-scons=/usr/bin/python2.7 --exe Hello_world.py --run
+  - travis_wait nuitka                                --python2-for-scons=/usr/bin/python2.7 --exe Hello_world.py && ./Hello_world.exe
+  - travis_wait nuitka --recurse-all --recurse-stdlib --python2-for-scons=/usr/bin/python2.7 --exe Hello_world.py && ./Hello_world.exe
   - which nuitka
   - nuitka --recurse-none --python2-for-scons=/usr/bin/python2.7  --exe `which nuitka`
   - ./nuitka.exe --version || true
