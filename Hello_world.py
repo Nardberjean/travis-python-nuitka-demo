@@ -2,7 +2,7 @@
 
 from os import times, sysconf_names, sysconf
 
-print ("Hello World!")
+print "Hello World!"
 
 f = open('/proc/uptime')
 for line in f:
