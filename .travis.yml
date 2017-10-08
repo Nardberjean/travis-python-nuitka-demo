@@ -9,6 +9,7 @@ matrix:
   allow_failures:
     - python: nightly
 script:
+  - apt-cache policy python python3
   - pytest
   - python Hello_world.py
   - travis_wait nuitka --recurse-all --recurse-stdlib --exe Hello_world.py
