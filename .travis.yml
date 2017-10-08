@@ -18,3 +18,4 @@ script:
   - travis_wait ./nuitka.exe --recurse-all --recurse-stdlib --exe Hello_world.py
   - ./Hello_world.exe
   - ls
+  - nuitka --help
