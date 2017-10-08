@@ -12,13 +12,14 @@ before_install:
   - apt-cache policy python python2.7-minimal python3
   - dpkg --search /usr/bin/python
   - dpkg --search /usr/bin/python2.7
+  - which python2.7
 script:
   - pytest
   - python Hello_world.py
-  - travis_wait nuitka --recurse-all --recurse-stdlib --python2-for-scons=python2.7 --exe Hello_world.py
+  - travis_wait nuitka --recurse-all --recurse-stdlib --python2-for-scons=/usr/bin/python2.7 --exe Hello_world.py
   - ./Hello_world.exe
   - which nuitka
-  - nuitka --recurse-none --python2-for-scons=python2.7  --exe `which nuitka`
+  - nuitka --recurse-none --python2-for-scons=/usr/bin/python2.7  --exe `which nuitka`
   - ./nuitka.exe --version || true
   - ls
   - nuitka --help
