@@ -9,6 +9,8 @@ matrix:
   allow_failures:
     - python: 3.6, nightly
 before_install:
+  - gcc --version
+  - g++ --version
   - apt-cache policy python python2.7-minimal python-dev python3 python3-dev
   - dpkg --search /usr/bin/python
   - dpkg --search /usr/bin/python2.7
