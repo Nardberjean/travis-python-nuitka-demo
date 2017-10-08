@@ -8,7 +8,7 @@ matrix:
   fast_finish: true
   allow_failures:
     - python: nightly
-install:
+before_install:
   - apt-cache policy python python3
 script:
   - pytest
