@@ -1,9 +1,9 @@
 language: python
 python:
   - 2.7
-  - # 3.6 # nuitka seems to work only with python2.7 with the used command option (--recurse-all --recurse-stdlib)
-  - # 3.6-dev
-  - # nightly
+  # - 3.6 # nuitka seems to work only with python2.7 with the used command option (--recurse-all --recurse-stdlib)
+  # - 3.6-dev
+  # - nightly
 matrix:
   fast_finish: true
   allow_failures:
