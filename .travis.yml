@@ -1,6 +1,12 @@
 language: python
 python:
   - 2.7
+  - 3.0
+  - 3.1
+  - 3.2
+  - 3.3
+  - 3.4
+  - 3.5
   - 3.6 # nuitka seems to work only with python2.7 with the used command option (--recurse-all --recurse-stdlib)
   # - 3.6-dev
   # - nightly
@@ -19,8 +25,8 @@ before_install:
 script:
   - pytest
   - python Hello_world.py
-  - travis_wait 30 nuitka                                --python2-for-scons=/usr/bin/python2.7 --exe Hello_world.py && ./Hello_world.exe
-  - travis_wait 30 nuitka --recurse-all --recurse-stdlib --python2-for-scons=/usr/bin/python2.7 --exe Hello_world.py && ./Hello_world.exe
+  -             nuitka                                --python2-for-scons=/usr/bin/python2.7 --exe Hello_world.py && ./Hello_world.exe
+  - travis_wait nuitka --recurse-all --recurse-stdlib --python2-for-scons=/usr/bin/python2.7 --exe Hello_world.py && ./Hello_world.exe
   - which nuitka
   - nuitka --recurse-none --python2-for-scons=/usr/bin/python2.7  --exe `which nuitka`
   - ./nuitka.exe --version || true
