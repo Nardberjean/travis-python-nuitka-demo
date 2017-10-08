@@ -14,9 +14,8 @@ script:
   - travis_wait nuitka --recurse-all --recurse-stdlib --exe Hello_world.py
   - ./Hello_world.exe
   - which nuitka
-  - travis_wait nuitka --exe `which nuitka`
-  - travis_wait ./nuitka.exe --recurse-all --recurse-stdlib --exe Hello_world.py
-  - ./Hello_world.exe
+  - travis_wait nuitka --recurse-none --exe `which nuitka`
+  - travis_wait ./nuitka.exe --version
   - ls
   - nuitka --help
 
