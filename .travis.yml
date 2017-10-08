@@ -1,8 +1,9 @@
 language: python
 python:
-  - 3.6
-  - 3.6-dev
-  - nightly
+  - 2.7
+  - # 3.6
+  - # 3.6-dev
+  - # nightly
 matrix:
   fast_finish: true
   allow_failures:
@@ -13,5 +14,4 @@ script:
   - which nuitka
   - travis_wait nuitka --recurse-all --recurse-stdlib --exe Hello_world.py
   - ls
-  - cat travis_wait_*.log
   - ./Hello_world.exe
