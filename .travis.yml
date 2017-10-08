@@ -9,7 +9,7 @@ matrix:
   allow_failures:
     - python: nightly
 before_install:
-  - apt-cache policy python python2.7-minimal python3
+  - apt-cache policy python python2.7-minimal python-dev python3 python3-dev
   - dpkg --search /usr/bin/python
   - dpkg --search /usr/bin/python2.7
   - which python2.7
