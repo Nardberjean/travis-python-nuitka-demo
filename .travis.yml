@@ -32,14 +32,19 @@ script:
   - pytest
   - python Hello_world.py
   -             nuitka                                $CLANG --python2-for-scons=/usr/bin/python2.7 --exe Hello_world.py && ./Hello_world.exe
+  - ls -l Hello_world.exe ; file Hello_world.exe
   # - travis_wait nuitka --recurse-all --recurse-stdlib --python2-for-scons=/usr/bin/python2.7 --exe Hello_world.py && ./Hello_world.exe
   - travis_wait nuitka --recurse-all                  $CLANG --python2-for-scons=/usr/bin/python2.7 --exe Hello_world.py && ./Hello_world.exe
+  - ls -l Hello_world.exe ; file Hello_world.exe
   - which nuitka
-  - nuitka --recurse-all --python2-for-scons=/usr/bin/python2.7  --exe `which nuitka`
+  - nuitka --recurse-all $CLANG --python2-for-scons=/usr/bin/python2.7  --exe `which nuitka`
+  - ls -l nuitka.exe ; file nuitka.exe
   - ./nuitka.exe --version || true
   - ls --color
   - ./nuitka.exe $CLANG --python2-for-scons=/usr/bin/python2.7 --exe Hello_world.py && ./Hello_world.exe
+  - ls -l Hello_world.exe ; file Hello_world.exe
   - ./nuitka.exe --recurse-all $CLANG --python2-for-scons=/usr/bin/python2.7  --exe `which nuitka`
+  - ls -l nuitka.exe ; file nuitka.exe
   - nuitka --help
 
 # Python3, yes but Python2 compile time dependency
