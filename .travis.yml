@@ -8,6 +8,10 @@ python:
   - 3.6 # nuitka seems to work only with python2.7 with the used command option (--recurse-all --recurse-stdlib)
   - 3.6-dev
   - nightly
+env:
+  matrix:
+  - CLANG
+  - CLANG=--clang
 matrix:
   fast_finish: true
   allow_failures:
@@ -27,13 +31,15 @@ before_install:
 script:
   - pytest
   - python Hello_world.py
-  -             nuitka                                --python2-for-scons=/usr/bin/python2.7 --exe Hello_world.py && ./Hello_world.exe
+  -             nuitka                                $CLANG --python2-for-scons=/usr/bin/python2.7 --exe Hello_world.py && ./Hello_world.exe
   # - travis_wait nuitka --recurse-all --recurse-stdlib --python2-for-scons=/usr/bin/python2.7 --exe Hello_world.py && ./Hello_world.exe
-  - travis_wait nuitka --recurse-all                  --python2-for-scons=/usr/bin/python2.7 --exe Hello_world.py && ./Hello_world.exe
+  - travis_wait nuitka --recurse-all                  $CLANG --python2-for-scons=/usr/bin/python2.7 --exe Hello_world.py && ./Hello_world.exe
   - which nuitka
   - nuitka --recurse-all --python2-for-scons=/usr/bin/python2.7  --exe `which nuitka`
   - ./nuitka.exe --version || true
-  - ls
+  - ls --color
+  - ./nuitka.exe $CLANG --python2-for-scons=/usr/bin/python2.7 --exe Hello_world.py && ./Hello_world.exe
+  - ./nuitka.exe --recurse-all $CLANG --python2-for-scons=/usr/bin/python2.7  --exe `which nuitka`
   - nuitka --help
 
 # Python3, yes but Python2 compile time dependency
