@@ -22,32 +22,33 @@ matrix:
     - python: 3.6-dev
     - python: nightly
 before_install:
-  - gcc --version
-  - g++ --version
-  - apt-cache policy python python2.7-minimal python-dev python3 python3-dev
-  - dpkg --search /usr/bin/python
-  - dpkg --search /usr/bin/python2.7
-  - which python2.7
+- $nuitka=nuitka$(python -c "import sys ; v=sys.version_info[0] ; print(v if 2<v else '')")
+- gcc --version
+- g++ --version
+- apt-cache policy python python2.7-minimal python-dev python3 python3-dev
+- dpkg --search /usr/bin/python
+- dpkg --search /usr/bin/python2.7
+- which python2.7
 script:
   - pytest
   - python Hello_world.py
   - ls --color /home/travis/virtualenv/python3.*/bin
-  -             nuitka                                $CLANG --python2-for-scons=/usr/bin/python2.7 --exe Hello_world.py && ./Hello_world.exe
+  -             $nuitka                                $CLANG --python2-for-scons=/usr/bin/python2.7 --exe Hello_world.py && ./Hello_world.exe
   - ls -l Hello_world.exe ; file Hello_world.exe
-  # - travis_wait nuitka --recurse-all --recurse-stdlib --python2-for-scons=/usr/bin/python2.7 --exe Hello_world.py && ./Hello_world.exe
-  - travis_wait nuitka --recurse-all                  $CLANG --python2-for-scons=/usr/bin/python2.7 --exe Hello_world.py && ./Hello_world.exe
+  # - travis_wait $nuitka --recurse-all --recurse-stdlib --python2-for-scons=/usr/bin/python2.7 --exe Hello_world.py && ./Hello_world.exe
+  - travis_wait $nuitka --recurse-all                  $CLANG --python2-for-scons=/usr/bin/python2.7 --exe Hello_world.py && ./Hello_world.exe
   - ls -l Hello_world.exe ; file Hello_world.exe
-  - which nuitka
-  - nuitka --recurse-all $CLANG --python2-for-scons=/usr/bin/python2.7  --exe `which nuitka`
-  - ls -l nuitka.exe ; file nuitka.exe
-  - ./nuitka.exe --version || true
+  - which $nuitka
+  - $nuitka --recurse-all $CLANG --python2-for-scons=/usr/bin/python2.7  --exe `which $nuitka`
+  - ls -l $nuitka.exe ; file $nuitka.exe
+  - ./$nuitka.exe --version || true
   - ls --color
   # - ./nuitka.exe $CLANG --python2-for-scons=/usr/bin/python2.7 --exe Hello_world.py && ./Hello_world.exe
   # - ls -l Hello_world.exe ; file Hello_world.exe
   # - ./nuitka.exe --recurse-all $CLANG --python2-for-scons=/usr/bin/python2.7  --exe `which nuitka`
   # - ls -l nuitka.exe ; file nuitka.exe
-  - ./nuitka.exe --help || true
-  - nuitka --help
+  - ./$nuitka.exe --help || true
+  - $nuitka --help
 
 # Python3, yes but Python2 compile time dependency
 # http://nuitka.net/doc/user-manual.html#use-case-1-program-compilation-with-all-modules-embedded
