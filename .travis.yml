@@ -22,7 +22,7 @@ matrix:
     - python: 3.6-dev
     - python: nightly
 before_install:
-- $nuitka=nuitka$(python -c "import sys ; v=sys.version_info[0] ; print(v if 2<v else '')")
+- nuitka=nuitka$(python -c "import sys ; v=sys.version_info[0] ; print(v if 2<v else '')")
 - gcc --version
 - g++ --version
 - apt-cache policy python python2.7-minimal python-dev python3 python3-dev
