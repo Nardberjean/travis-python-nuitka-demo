@@ -55,7 +55,7 @@ script:
 - ls --color /home/travis/virtualenv/python3.6.3/lib/python3.6/site-packages
 - ls --color /home/travis/virtualenv/python3.6.3/lib/python3.6/site-packages/nuitka
 - python -m nuitka || true
-- $nuitka --recurse-all $CLANG --module --run nuitka
+- $nuitka --recurse-all $CLANG --module --run --include-package=nuitka
 - $nuitka --recurse-all $CLANG $(command -v $nuitka)
 # --python2-for-scons=/usr/bin/python2.7
 - du -sch $nuitka.bin ; file $nuitka.bin
