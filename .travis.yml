@@ -37,30 +37,31 @@ script:
 - pytest
 - python Hello_world.py
 # - ls --color /home/travis/virtualenv/python3.*/bin
--             $nuitka                                $CLANG --exe Hello_world.py && file Hello_world.bin # ./Hello_world.exe
+-             $nuitka                                $CLANG --exe Hello_world.py && ./Hello_world.bin
 # --python2-for-scons=/usr/bin/python2.7
 - du -sch Hello_world.bin ; file Hello_world.bin
-# - travis_wait $nuitka --recurse-all --recurse-stdlib --python2-for-scons=/usr/bin/python2.7 --exe Hello_world.py && ./Hello_world.exe
+- travis_wait $nuitka --recurse-all --recurse-stdlib --exe Hello_world.py && ./Hello_world.bin ##
+# --python2-for-scons=/usr/bin/python2.7 
 - travis_wait $nuitka --recurse-all                  $CLANG --exe Hello_world.py && ./Hello_world.bin
 # --python2-for-scons=/usr/bin/python2.7
-- du -sch Hello_world.exe ; file Hello_world.exe
+- du -sch Hello_world.bin ; file Hello_world.bin
 - command -v $nuitka
 - $nuitka --recurse-all $CLANG --exe $(command -v $nuitka)
 # --python2-for-scons=/usr/bin/python2.7
-- du -sch $nuitka.exe ; file $nuitka.exe
+- du -sch $nuitka.bin ; file $nuitka.bin
 
 after_script:
-- ./$nuitka.exe --version
+- ./$nuitka.bin --version
 - ls --color
 - $nuitka --help
-- ./$nuitka.exe --help
+- ./$nuitka.bin --help
 
-- ./$nuitka.exe $CLANG --exe Hello_world.py && ./Hello_world.exe
+- ./$nuitka.bin $CLANG --exe Hello_world.py && ./Hello_world.bin
 # --python2-for-scons=/usr/bin/python2.7 
-- du -sch Hello_world.exe ; file Hello_world.exe
-- ./$nuitka.exe --recurse-all $CLANG --exe $(command -v $nuitka)
+- du -sch Hello_world.bin ; file Hello_world.bin
+- ./$nuitka.bin --recurse-all $CLANG --exe $(command -v $nuitka)
 # --python2-for-scons=/usr/bin/python2.7
-- du -sch $nuitka.exe ; file $nuitka.exe
+- du -sch $nuitka.bin ; file $nuitka.bin
 
 # Python3, yes but Python2 compile time dependency
 # http://nuitka.net/doc/user-manual.html#use-case-1-program-compilation-with-all-modules-embedded
