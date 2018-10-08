@@ -52,6 +52,7 @@ script:
 - file       /home/travis/virtualenv/python3.6.3/include/*
 - ls --color /home/travis/virtualenv/python3.6.3/lib
 - ls --color /home/travis/virtualenv/python3.6.3/lib/python3.6
+- ls --color /home/travis/virtualenv/python3.6.3/lib/python3.6/site-packages
 - $nuitka --recurse-all $CLANG --exe $(command -v $nuitka)
 # --python2-for-scons=/usr/bin/python2.7
 - du -sch $nuitka.bin ; file $nuitka.bin
