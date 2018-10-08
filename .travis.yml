@@ -1,14 +1,14 @@
 language: python
 python:
   - 2.7
-  # - 3.2 # too old for nuitka
-  # - 3.3 # too old for nuitka
-  - 3.4 # May have a Scons issue # http://nuitka.net/doc/user-manual.html
-  - 3.5
   - 3.6 # nuitka seems to work only with python2.7 with the used command option (--recurse-all --recurse-stdlib)
-  - 3.6-dev
-  - 3.7-dev
+  - 3.5
+  - 3.4 # May have a Scons issue # http://nuitka.net/doc/user-manual.html
+  # - 3.3 # too old for nuitka
+  # - 3.2 # too old for nuitka
   - nightly
+  - 3.7-dev
+  - 3.6-dev
 env:
   matrix:
   - CLANG
@@ -16,13 +16,14 @@ env:
 matrix:
   fast_finish: true
   allow_failures:
-    - python: 3.2
-    - python: 3.3
-    - python: 3.4
-    - python: 3.5
-    - python: 3.6-dev
-    - python: 3.7-dev
     - python: nightly
+    - python: 3.7-dev
+    - python: 3.6-dev
+
+    - python: 3.5
+    - python: 3.4
+    - python: 3.3
+    - python: 3.2
 
 before_install:
 - nuitka=nuitka$(python -c "import sys ; v=sys.version_info[0] ; print(v if 2<v else '')")
@@ -43,9 +44,10 @@ script:
 -             $nuitka --recurse-all                  $CLANG --exe Hello_world.py && ./Hello_world.bin
 # --python2-for-scons=/usr/bin/python2.7
 - du -sch Hello_world.bin ; file Hello_world.bin
-- command -v $nuitka
+# - command -v $nuitka
 - file $(command -v $nuitka)
 - head $(command -v $nuitka)
+- ls --color /home/travis/virtualenv/python3.6.3
 - $nuitka --recurse-all $CLANG --exe $(command -v $nuitka)
 # --python2-for-scons=/usr/bin/python2.7
 - du -sch $nuitka.bin ; file $nuitka.bin
