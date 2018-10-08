@@ -38,10 +38,10 @@ script:
 - pytest
 - python Hello_world.py
 # - ls --color /home/travis/virtualenv/python3.*/bin
--             $nuitka                                $CLANG --exe Hello_world.py && ./Hello_world.bin
+-             $nuitka                                $CLANG --run Hello_world.py
 # --python2-for-scons=/usr/bin/python2.7
 - du -sch Hello_world.bin ; file Hello_world.bin
--             $nuitka --recurse-all                  $CLANG --exe Hello_world.py && ./Hello_world.bin
+-             $nuitka --recurse-all                  $CLANG --run Hello_world.py
 # --python2-for-scons=/usr/bin/python2.7
 - du -sch Hello_world.bin ; file Hello_world.bin
 # - command -v $nuitka
@@ -54,8 +54,9 @@ script:
 - ls --color /home/travis/virtualenv/python3.6.3/lib/python3.6
 - ls --color /home/travis/virtualenv/python3.6.3/lib/python3.6/site-packages
 - ls --color /home/travis/virtualenv/python3.6.3/lib/python3.6/site-packages/nuitka
-- python -m nuitka
-- $nuitka --recurse-all $CLANG --exe $(command -v $nuitka)
+- python -m nuitka || true
+- $nuitka --recurse-all $CLANG --module --run nuitka
+- $nuitka --recurse-all $CLANG $(command -v $nuitka)
 # --python2-for-scons=/usr/bin/python2.7
 - du -sch $nuitka.bin ; file $nuitka.bin
 
