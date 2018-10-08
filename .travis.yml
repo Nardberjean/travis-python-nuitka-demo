@@ -45,6 +45,7 @@ script:
 - du -sch Hello_world.bin ; file Hello_world.bin
 - command -v $nuitka
 - file $(command -v $nuitka)
+- head $(command -v $nuitka)
 - $nuitka --recurse-all $CLANG --exe $(command -v $nuitka)
 # --python2-for-scons=/usr/bin/python2.7
 - du -sch $nuitka.bin ; file $nuitka.bin
