@@ -37,7 +37,7 @@ script:
 - pytest
 - python Hello_world.py
 # - ls --color /home/travis/virtualenv/python3.*/bin
--             $nuitka                                $CLANG --exe Hello_world.py && ./Hello_world.exe
+-             $nuitka                                $CLANG --exe Hello_world.py && ls # ./Hello_world.exe
 # --python2-for-scons=/usr/bin/python2.7
 - du -sch Hello_world.exe ; file Hello_world.exe
 # - travis_wait $nuitka --recurse-all --recurse-stdlib --python2-for-scons=/usr/bin/python2.7 --exe Hello_world.py && ./Hello_world.exe
