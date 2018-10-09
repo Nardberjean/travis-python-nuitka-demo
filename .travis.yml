@@ -69,13 +69,16 @@ script:
 - |
   python -c "$(cat << EOM
   import sys
+  print('PYTHONPATH')
   for i in sys.path:
       print(i)
   EOM
   )"
-
-- python -m $nuitka | head
-- python -v -m $nuitka 2>&1| grep $nuitka
+# https://docs.python.org/3/using/cmdline.html
+- ! python -m $nuitka
+# /home/travis/virtualenv/python3.6.3/bin/python: No code object available for nuitka3
+# https://bugs.python.org/issue30403
+# - python -v -m $nuitka 2>&1| grep $nuitka
 - rm ./$nuitka.so
 - rm ./$nuitka.pyi
 
