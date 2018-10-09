@@ -75,7 +75,7 @@ script:
   EOM
   )"
 # https://docs.python.org/3/using/cmdline.html
-- ! python -m $nuitka
+- (! python -m $nuitka)
 # /home/travis/virtualenv/python3.6.3/bin/python: No code object available for nuitka3
 # https://bugs.python.org/issue30403
 # - python -v -m $nuitka 2>&1| grep $nuitka
@@ -90,7 +90,6 @@ script:
 - ./$nuitka.bin $CLANG --run Hello_world.py | head # ModuleNotFoundError: No module named 'nuitka'
 - ./$nuitka.bin --recurse-all $CLANG --include-package=nuitka $(command -v $nuitka) | head # ModuleNotFoundError: No module named 'nuitka'
 - rm ./$nuitka.bin
-- rm ./$nuitka.pyi
 
 - python -m nuitka --recurse-all $CLANG --include-package=nuitka $(command -v $nuitka)
 - ls --color
@@ -100,7 +99,6 @@ script:
 - ./$nuitka.bin $CLANG --run Hello_world.py
 - ./$nuitka.bin --recurse-all $CLANG --include-package=nuitka $(command -v $nuitka)
 - rm ./$nuitka.bin
-- rm ./$nuitka.pyi
 
 - $nuitka --recurse-all $CLANG --include-package=nuitka $(command -v $nuitka)
 - ls --color
@@ -110,7 +108,6 @@ script:
 - ./$nuitka.bin $CLANG --run Hello_world.py
 - ./$nuitka.bin --recurse-all $CLANG --include-package=nuitka $(command -v $nuitka)
 - rm ./$nuitka.bin
-- rm ./$nuitka.pyi
 
 
 
