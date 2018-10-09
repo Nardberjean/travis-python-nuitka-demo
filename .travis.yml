@@ -58,8 +58,8 @@ script:
 - ls --color /home/travis/virtualenv/python3.6.3/lib/python3.6
 - ls --color /home/travis/virtualenv/python3.6.3/lib/python3.6/site-packages
 # - ls --color /home/travis/virtualenv/python3.6.3/lib/python3.6/site-packages/nuitka
-- python -m nuitka 2>&1|| head
-- $nuitka --recurse-all $CLANG --module --run --include-package=nuitka 2>&1|| head
+- python -m nuitka | head
+- $nuitka --recurse-all $CLANG --module --run --include-package=nuitka | head
 - file $(which python)
 
 - python -m nuitka --recurse-all $CLANG --module $(command -v $nuitka)
