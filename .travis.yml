@@ -61,24 +61,32 @@ script:
 - python -m nuitka | head
 - $nuitka --recurse-all $CLANG --module --run --include-package=nuitka | head
 - file $(which python)
+- ls --color /home/travis/virtualenv/python3.6.3/bin || true
 
 - python -m nuitka --recurse-all $CLANG --module $(command -v $nuitka)
 - ls --color
+- du -sch $nuitka.so ; file $nuitka.so ; md5sum $nuitka.so
+- python -v -m $nuitka 2>&1| grep $nuitka
+- rm ./$nuitka.so
+- rm ./$nuitka.pyi
 
 - python -m nuitka --recurse-all $CLANG $(command -v $nuitka)
 - ls --color
-- du -sch $nuitka.bin ; file $nuitka.bin ; file $nuitka.bin
+- du -sch $nuitka.bin ; file $nuitka.bin ; md5sum $nuitka.bin
 - ./$nuitka.bin --version
 - ./$nuitka.bin --help | head
 - ./$nuitka.bin $CLANG --run Hello_world.py
 - ./$nuitka.bin --recurse-all $CLANG --include-package=nuitka $(command -v $nuitka)
 - rm ./$nuitka.bin
+- rm ./$nuitka.pyi
 
 - python -m nuitka --recurse-all $CLANG --include-package=nuitka $(command -v $nuitka)
 - rm ./$nuitka.bin
+- rm ./$nuitka.pyi
 
 - $nuitka --recurse-all $CLANG --include-package=nuitka $(command -v $nuitka)
 - rm ./$nuitka.bin
+- rm ./$nuitka.pyi
 
 
 
