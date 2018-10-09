@@ -85,6 +85,16 @@ script:
 - python -m nuitka --recurse-all $CLANG $(command -v $nuitka)
 - ls --color
 - du -sch $nuitka.bin ; file $nuitka.bin ; md5sum $nuitka.bin
+- ./$nuitka.bin --version | head # ModuleNotFoundError: No module named 'nuitka'
+- ./$nuitka.bin --help | head # ModuleNotFoundError: No module named 'nuitka'
+- ./$nuitka.bin $CLANG --run Hello_world.py | head # ModuleNotFoundError: No module named 'nuitka'
+- ./$nuitka.bin --recurse-all $CLANG --include-package=nuitka $(command -v $nuitka) | head # ModuleNotFoundError: No module named 'nuitka'
+- rm ./$nuitka.bin
+- rm ./$nuitka.pyi
+
+- python -m nuitka --recurse-all $CLANG --include-package=nuitka $(command -v $nuitka)
+- ls --color
+- du -sch $nuitka.bin ; file $nuitka.bin ; md5sum $nuitka.bin
 - ./$nuitka.bin --version
 - ./$nuitka.bin --help | head
 - ./$nuitka.bin $CLANG --run Hello_world.py
@@ -92,11 +102,13 @@ script:
 - rm ./$nuitka.bin
 - rm ./$nuitka.pyi
 
-- python -m nuitka --recurse-all $CLANG --include-package=nuitka $(command -v $nuitka)
-- rm ./$nuitka.bin
-- rm ./$nuitka.pyi
-
 - $nuitka --recurse-all $CLANG --include-package=nuitka $(command -v $nuitka)
+- ls --color
+- du -sch $nuitka.bin ; file $nuitka.bin ; md5sum $nuitka.bin
+- ./$nuitka.bin --version
+- ./$nuitka.bin --help | head
+- ./$nuitka.bin $CLANG --run Hello_world.py
+- ./$nuitka.bin --recurse-all $CLANG --include-package=nuitka $(command -v $nuitka)
 - rm ./$nuitka.bin
 - rm ./$nuitka.pyi
 
