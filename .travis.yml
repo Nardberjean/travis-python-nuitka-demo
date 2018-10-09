@@ -2,13 +2,14 @@ language: python
 python:
   - 2.7
   - 3.6 # nuitka seems to work only with python2.7 with the used command option (--recurse-all --recurse-stdlib)
-  - 3.5
-  - 3.4 # May have a Scons issue # http://nuitka.net/doc/user-manual.html
+  ## - 3.5
+  ## - 3.4 # May have a Scons issue # http://nuitka.net/doc/user-manual.html
   # - 3.3 # too old for nuitka
   # - 3.2 # too old for nuitka
-  - nightly
-  - 3.7-dev
-  - 3.6-dev
+  ## - nightly
+  ## - 3.7-dev
+  ## - 3.6-dev
+  ## speedup
 env:
   matrix:
   - CLANG
@@ -57,26 +58,34 @@ script:
 - ls --color /home/travis/virtualenv/python3.6.3/lib/python3.6
 - ls --color /home/travis/virtualenv/python3.6.3/lib/python3.6/site-packages
 # - ls --color /home/travis/virtualenv/python3.6.3/lib/python3.6/site-packages/nuitka
-- python -m nuitka || true
-- $nuitka --recurse-all $CLANG --module --run --include-package=nuitka || true
-- $nuitka --recurse-all $CLANG --include-package=nuitka $(command -v $nuitka)
+- python -m nuitka || head
+- $nuitka --recurse-all $CLANG --module --run --include-package=nuitka || head
+- file $(which python)
+
+- python -m nuitka --recurse-all $CLANG --module $(command -v $nuitka)
+- ls --color
+
 - python -m nuitka --recurse-all $CLANG $(command -v $nuitka)
+- ls --color
+- du -sch $nuitka.bin ; file $nuitka.bin ; file $nuitka.bin
+- ./$nuitka.bin --version
+- ./$nuitka.bin --help | head
+- ./$nuitka.bin $CLANG --run Hello_world.py
+- ./$nuitka.bin --recurse-all $CLANG --include-package=nuitka $(command -v $nuitka)
+- rm ./$nuitka.bin
+
 - python -m nuitka --recurse-all $CLANG --include-package=nuitka $(command -v $nuitka)
-# --python2-for-scons=/usr/bin/python2.7
-- du -sch $nuitka.bin ; file $nuitka.bin
+- rm ./$nuitka.bin
+
+- $nuitka --recurse-all $CLANG --include-package=nuitka $(command -v $nuitka)
+- rm ./$nuitka.bin
+
+
 
 after_script:
-- ./$nuitka.bin --version
-- ls --color
 - $nuitka --help
-- ./$nuitka.bin --help
 
-- ./$nuitka.bin $CLANG --exe Hello_world.py && ./Hello_world.bin
 # --python2-for-scons=/usr/bin/python2.7 
-- du -sch Hello_world.bin ; file Hello_world.bin
-- ./$nuitka.bin --recurse-all $CLANG --include-package=nuitka $(command -v $nuitka)
-# --python2-for-scons=/usr/bin/python2.7
-- du -sch $nuitka.bin ; file $nuitka.bin
 
 - travis_wait $nuitka --recurse-all --recurse-stdlib --exe Hello_world.py && ./Hello_world.bin ##
 # --python2-for-scons=/usr/bin/python2.7 
