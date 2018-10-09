@@ -66,13 +66,13 @@ script:
 - python -m nuitka --recurse-all $CLANG --module $(command -v $nuitka)
 - ls --color
 - du -sch $nuitka.so ; file $nuitka.so ; md5sum $nuitka.so
-- '|
+- |
   python -c "$(cat << EOM
   import sys
   for i in sys.path:
       print(i)
   EOM
-  )"'
+  )"
 
 - python -m $nuitka | head
 - python -v -m $nuitka 2>&1| grep $nuitka
