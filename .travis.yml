@@ -95,18 +95,18 @@ script:
 - ls --color
 - du -sch $nuitka.bin ; file $nuitka.bin ; md5sum $nuitka.bin
 - ./$nuitka.bin --version
-- ./$nuitka.bin --help | head
-- ./$nuitka.bin $CLANG --run Hello_world.py
-- ./$nuitka.bin --recurse-all $CLANG --include-package=nuitka $(command -v $nuitka)
+- ./$nuitka.bin --help
+- ./$nuitka.bin $CLANG --run Hello_world.py | head
+- ./$nuitka.bin --recurse-all $CLANG --include-package=nuitka $(command -v $nuitka) | head
 - rm ./$nuitka.bin
 
 - $nuitka --recurse-all $CLANG --include-package=nuitka $(command -v $nuitka)
 - ls --color
 - du -sch $nuitka.bin ; file $nuitka.bin ; md5sum $nuitka.bin
 - ./$nuitka.bin --version
-- ./$nuitka.bin --help | head
-- ./$nuitka.bin $CLANG --run Hello_world.py
-- ./$nuitka.bin --recurse-all $CLANG --include-package=nuitka $(command -v $nuitka)
+- ./$nuitka.bin --help
+- ./$nuitka.bin $CLANG --run Hello_world.py | head
+- ./$nuitka.bin --recurse-all $CLANG --include-package=nuitka $(command -v $nuitka) | head
 - rm ./$nuitka.bin
 
 
