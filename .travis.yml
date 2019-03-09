@@ -19,10 +19,10 @@ matrix:
   include:
   - python: 3.7
     dist: xenial
-    env:
-    - CLANG=--clang
-  - python: 3.7
-    dist: xenial
+    # env:
+    # - CLANG=--clang
+  # - python: 3.7
+    # dist: xenial
   allow_failures:
     - python: nightly
     - python: 3.7-dev
@@ -59,17 +59,17 @@ script:
 # - command -v $nuitka
 - file $(command -v $nuitka)
 - head $(command -v $nuitka)
-- ls --color /home/travis/virtualenv/python3.6.3
-- ls --color /home/travis/virtualenv/python3.6.3/include
-- file       /home/travis/virtualenv/python3.6.3/include/*
-- ls --color /home/travis/virtualenv/python3.6.3/lib
-- ls --color /home/travis/virtualenv/python3.6.3/lib/python3.6
-- ls --color /home/travis/virtualenv/python3.6.3/lib/python3.6/site-packages
-# - ls --color /home/travis/virtualenv/python3.6.3/lib/python3.6/site-packages/nuitka
+- ls --color /home/travis/virtualenv/python3.*
+- ls --color /home/travis/virtualenv/python3.*/include
+- file       /home/travis/virtualenv/python3.*/include/*
+- ls --color /home/travis/virtualenv/python3.*/lib
+- ls --color /home/travis/virtualenv/python3.*/lib/python3.*
+- ls --color /home/travis/virtualenv/python3.*/lib/python3.*/site-packages
+# - ls --color /home/travis/virtualenv/python3.*/lib/python3.*/site-packages/nuitka
 - python -m nuitka | head
 - $nuitka --recurse-all $CLANG --module --run --include-package=nuitka | head
 - file $(which python)
-- ls --color /home/travis/virtualenv/python3.6.3/bin || true
+- ls --color /home/travis/virtualenv/python3.*/bin || true
 
 - python -m nuitka --recurse-all $CLANG --module $(command -v $nuitka)
 - ls --color
