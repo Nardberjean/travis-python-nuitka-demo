@@ -12,8 +12,9 @@ python:
   ## speedup
 env:
   matrix:
-  - CLANG=--clang
   - CLANG
+  - CLANG="--clang"
+
 matrix:
   fast_finish: true
   include:
