@@ -12,7 +12,7 @@ python:
   ## speedup
 env:
   matrix:
-  # - CLANG
+  - # CLANG
   - CLANG="--clang"
 
 matrix:
