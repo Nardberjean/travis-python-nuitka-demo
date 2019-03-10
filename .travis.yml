@@ -1,7 +1,6 @@
 language: python
 python:
 - 3.6 # nuitka seems to work only with python2.7 with the used command option (--recurse-all --recurse-stdlib)
-- 2.7
   ## - 3.5
   ## - 3.4 # May have a Scons issue # http://nuitka.net/doc/user-manual.html
   # - 3.3 # too old for nuitka
@@ -24,6 +23,10 @@ matrix:
     dist: xenial
     env:
     - CLANG="--clang"
+  - python: 2.7
+  - python: 2.7
+    env:
+    - CLANG="--clang"
   allow_failures:
     - python: nightly
     - python: 3.7-dev
@@ -36,9 +39,7 @@ matrix:
     - python: 3.3
     - python: 3.2
 
-    # - python: 2.7
-    - env:
-      -
+    - python: 2.7
 
 before_install:
 - nuitka=nuitka$(python -c "import sys ; v=sys.version_info[0] ; print(v if 2<v else '')")
