@@ -40,6 +40,8 @@ matrix:
     - python: 3.2
 
     - python: 2.7
+      env:
+      -
 
 before_install:
 - nuitka=nuitka$(python -c "import sys ; v=sys.version_info[0] ; print(v if 2<v else '')")
