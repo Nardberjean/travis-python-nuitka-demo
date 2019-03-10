@@ -38,7 +38,7 @@ matrix:
 
     - python: 2.7
       env:
-      - CLANG
+      - CLANG=""
 
 before_install:
 - nuitka=nuitka$(python -c "import sys ; v=sys.version_info[0] ; print(v if 2<v else '')")
