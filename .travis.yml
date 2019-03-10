@@ -23,7 +23,7 @@ matrix:
   - python: 3.7
     dist: xenial
     env:
-    - CLANG=--clang
+    - CLANG="--clang"
   allow_failures:
     - python: nightly
     - python: 3.7-dev
@@ -38,7 +38,7 @@ matrix:
 
     - python: 2.7
       env:
-      - CLANG=""
+      -
 
 before_install:
 - nuitka=nuitka$(python -c "import sys ; v=sys.version_info[0] ; print(v if 2<v else '')")
