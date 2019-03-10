@@ -1,9 +1,7 @@
 language: python
 python:
-  - 3.7
-    dist: xenial
-  - 3.6 # nuitka seems to work only with python2.7 with the used command option (--recurse-all --recurse-stdlib)
-  - 2.7
+- 3.6 # nuitka seems to work only with python2.7 with the used command option (--recurse-all --recurse-stdlib)
+- 2.7
   ## - 3.5
   ## - 3.4 # May have a Scons issue # http://nuitka.net/doc/user-manual.html
   # - 3.3 # too old for nuitka
@@ -22,10 +20,10 @@ matrix:
   include:
   - python: 3.7
     dist: xenial
-  # - python: 3.7
-  #   dist: xenial
-  #   env:
-  #   - CLANG=--clang
+  - python: 3.7
+    dist: xenial
+    env:
+    - CLANG=--clang
   allow_failures:
     - python: nightly
     - python: 3.7-dev
