@@ -24,6 +24,8 @@ matrix:
     env:
     - CLANG="--clang"
   - python: 2.7
+    env:
+    -
   - python: 2.7
     env:
     - CLANG="--clang"
